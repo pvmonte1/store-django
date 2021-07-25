@@ -1,0 +1,66 @@
+
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<!-- ========================= SECTION MAIN ========================= -->
+<section class="section-intro padding-y-sm">
+<div class="container">
+
+<div class="intro-banner-wrap">
+	<img src="{% static 'images/banners/cover.jpg' %}" class="img-fluid rounded">
+</div>
+
+</div> <!-- container //  -->
+</section>
+<!-- ========================= SECTION MAIN END// ========================= -->
+
+<!-- ========================= SECTION  ========================= -->
+<section class="section-name padding-y-sm">
+<div class="container">
+
+<header class="section-heading">
+	<a href="{% url 'tienda' %}" class="btn btn-outline-primary float-right">Ver Todos</a>
+	<h3 class="section-title">Popular products</h3>
+</header><!-- sect-heading -->
+
+	
+<div class="row">
+	{% for producto in productos %}
+	<div class="col-md-3">
+		<div class="card card-product-grid">
+			<a href="{{ producto.get_url }}" class="img-wrap"> <img src="{{ producto.images.url }}"> </a>
+			<figcaption class="info-wrap">
+				<a href="{{ producto.get_url }}" class="title">{{ producto.producto }}</a>
+				<div class="price mt-1">$ {{ producto.precio}}</div> <!-- price-wrap.// -->
+				<div class="rating-star">
+					<span>
+						<i class="fa fa-star{% if producto.averageRating < 0.5 %}-o{% elif producto.averageRating >= 0.5 and producto.averageRating < 1 %}-half-o {% endif %}" aria-hidden="true"></i>
+						<i class="fa fa-star{% if producto.averageRating < 1.5 %}-o{% elif producto.averageRating >= 1.5 and producto.averageRating < 2 %}-half-o {% endif %}" aria-hidden="true"></i>
+						<i class="fa fa-star{% if producto.averageRating < 2.5 %}-o{% elif producto.averageRating >= 2.5 and producto.averageRating < 3 %}-half-o {% endif %}" aria-hidden="true"></i>
+						<i class="fa fa-star{% if producto.averageRating < 3.5 %}-o{% elif producto.averageRating >= 3.5 and producto.averageRating < 4 %}-half-o {% endif %}" aria-hidden="true"></i>
+						<i class="fa fa-star{% if producto.averageRating < 4.5 %}-o{% elif producto.averageRating >= 4.5 and producto.averageRating < 5 %}-half-o {% endif %}" aria-hidden="true"></i>
+					</span>
+				</div>
+			</figcaption>
+		</div>
+	</div> <!-- col.// -->
+	{% endfor %}
+
+</div> <!-- row.// -->
+
+</div><!-- container // -->
+</section>
+<!-- ========================= SECTION  END// ========================= -->
+
+
+
+
+
+
+</body>
+</html>
+
+{% endblock %}
